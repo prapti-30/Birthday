@@ -1,7 +1,7 @@
 /* ---- Gallery ---- */
 .gallery {
-    --d: 10s;
-    /* slowed by 3s for elegance */
+    --d: 25s;
+    /* total cycle time for all 5 images */
     display: grid;
     place-items: center;
     width: 220px;
@@ -18,56 +18,51 @@
     border: 10px solid #3b2f2f;
     /* chocolate brown border */
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-    z-index: 2;
-    animation: elegantFade var(--d) ease-in-out infinite;
+    border-radius: 12px;
+    opacity: 0;
     transform-style: preserve-3d;
     backface-visibility: hidden;
-    border-radius: 12px;
+    animation: elegantSlide var(--d) linear infinite;
 }
 
-/* staggered delays for smooth flow */
+/* staggered delays so they play in sequence */
 .gallery>img:nth-child(1) {
     animation-delay: 0s;
 }
 
 .gallery>img:nth-child(2) {
-    animation-delay: 2s;
+    animation-delay: 5s;
 }
 
 .gallery>img:nth-child(3) {
-    animation-delay: 4s;
+    animation-delay: 10s;
 }
 
 .gallery>img:nth-child(4) {
-    animation-delay: 6s;
+    animation-delay: 15s;
 }
 
 .gallery>img:nth-child(5) {
-    animation-delay: 8s;
+    animation-delay: 20s;
 }
 
-/* ---- Elegant Fade + 3D Zoom/Slide ---- */
-@keyframes elegantFade {
+/* ---- Outer Slide + 3D effect ---- */
+@keyframes elegantSlide {
     0% {
         opacity: 0;
-        transform: translateZ(-150px) scale(0.9) rotateY(-10deg);
+        transform: translateX(100%) rotateY(-30deg) scale(0.9);
     }
 
-    10%,
-    40% {
+    5%,
+    20% {
         opacity: 1;
-        transform: translateZ(0) scale(1) rotateY(0deg);
+        transform: translateX(0) rotateY(0deg) scale(1);
     }
 
-    60% {
-        opacity: 1;
-        transform: translateZ(50px) scale(1.05) rotateY(5deg);
-    }
-
-    80%,
+    25%,
     100% {
         opacity: 0;
-        transform: translateZ(-150px) scale(0.9) rotateY(10deg);
+        transform: translateX(-100%) rotateY(30deg) scale(0.9);
     }
 }
 
@@ -103,15 +98,11 @@ body {
 #shine {
     font-size: 60px;
     font-weight: bold;
-    background: linear-gradient(90deg,
-            #c28840 0%,
-            #ffffff 50%,
-            #c28840 100%);
+    background: linear-gradient(90deg, #c28840 0%, #ffffff 50%, #c28840 100%);
     background-size: 200% auto;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-
     animation: shine 6s linear infinite;
     text-shadow: 0 0 10px rgba(194, 136, 64, 0.5);
 }
@@ -179,7 +170,7 @@ body {
     }
 
     .gallery {
-        --d: 12s;
+        --d: 30s;
         width: 150px;
     }
 
